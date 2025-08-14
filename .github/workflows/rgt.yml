@@ -1,0 +1,24 @@
+name: Copy NNUE File
+
+on:
+  workflow_dispatch: # Trigger manually from Actions tab
+
+jobs:
+  copy-file:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Copy NNUE file to src/
+        run: |
+          mkdir -p src
+          cp viridithas.nnue.zst src/viridithas.nnue.zst
+
+      - name: Commit changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/viridithas.nnue.zst
+          git commit -m "Add copy of viridithas.nnue.zst to src/"
+          git push
