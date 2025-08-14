@@ -3,7 +3,6 @@
 #![allow(clippy::missing_const_for_fn)]
 #![deny(missing_docs, clippy::undocumented_unsafe_blocks)]
 
-//! Viridithas, a UCI chess engine written in Rust.
 
 #[macro_use]
 mod macros;
@@ -41,7 +40,7 @@ use cli::Subcommands::{Analyse, CountPositions, Datagen, Splat};
 use cli::Subcommands::{Bench, Merge, NNUEDryRun, Perft, Quantise, Spsa, Verbatim, VisNNUE};
 
 /// The name of the engine.
-pub static NAME: &str = "Viridithas";
+pub static NAME: &str = "SupraNova";
 /// The version of the engine.
 pub static VERSION: &str = env!("CARGO_PKG_VERSION");
 
