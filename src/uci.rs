@@ -581,7 +581,7 @@ fn print_uci_response(info: &SearchInfo, full: bool) {
         "-dev"
     };
     println!("id name {NAME} {VERSION}{version_extension}");
-    println!("id author Cosmo");
+    println!("id author Suprateem");
     println!("option name Hash type spin default {UCI_DEFAULT_HASH_MEGABYTES} min 1 max {UCI_MAX_HASH_MEGABYTES}");
     println!("option name Threads type spin default 1 min 1 max 512");
     println!("option name PrettyPrint type check default false");
