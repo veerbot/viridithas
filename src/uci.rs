@@ -608,7 +608,7 @@ pub fn main_loop() -> anyhow::Result<()> {
     } else {
         "-dev"
     };
-    println!("{NAME} {VERSION}{version_extension} by Cosmo");
+    println!("{NAME} {VERSION}{version_extension} by Suprateem");
 
     let mut tt = TT::new();
     tt.resize(UCI_DEFAULT_HASH_MEGABYTES * MEGABYTE, 1); // default hash size
