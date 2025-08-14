@@ -1,0 +1,22 @@
+name: Download NNUE
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  download-nnue:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download latest NNUE file
+        run: |
+          curl -s "https://api.github.com/repos/cosmobobak/viridithas-networks/releases/latest" \
+          | grep -o '"browser_download_url": "[^"]*' \
+          | awk -F'"' '{print $4}' \
+          | xargs -L 1 wget -O viridithas.nnue.zst
+
+      - name: List files in repo root
+        run: ls -lh
