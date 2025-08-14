@@ -43,7 +43,7 @@ use cli::Subcommands::{Bench, Merge, NNUEDryRun, Perft, Quantise, Spsa, Verbatim
 pub static NAME: &str = "SupraNova";
 /// The version of the engine.
 pub static VERSION: &str = env!("CARGO_PKG_VERSION");
-
+/// This function starts the SupraNova chess engine's main loop.
 fn main() -> anyhow::Result<()> {
     #[cfg(debug_assertions)]
     std::env::set_var("RUST_BACKTRACE", "1");
