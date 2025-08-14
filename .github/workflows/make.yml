@@ -32,35 +32,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: viridithas-linux
-          path: target/release/viridithas
+          path: target/release/SupraNova
+          if-no-files-found: error
 
-  build-windows:
-    runs-on: windows-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Install Rust and Cargo
-        shell: pwsh
-        run: |
-          irm https://win.rustup.rs -UseBasicParsing | iex
-          rustc --version
-          cargo --version
-
-      - name: Install clang
-        shell: pwsh
-        run: |
-          choco install llvm --yes
-          clang --version
-
-      - name: Build Viridithas (Windows)
-        shell: pwsh
-        run: |
-          $env:RUSTFLAGS="-C target-cpu=native"
-          cargo b -r --features syzygy,bindgen
-
-      - name: Upload Windows executable
-        uses: actions/upload-artifact@v4
-        with:
-          name: viridithas-windows
-          path: target/release/viridithas.exe
+ 
