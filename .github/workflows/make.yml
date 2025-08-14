@@ -1,0 +1,66 @@
+name: Build Viridithas (Linux & Windows)
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Rust and Cargo
+        run: |
+          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+          source $HOME/.cargo/env
+          rustc --version
+          cargo --version
+
+      - name: Install clang
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang
+
+      - name: Build Viridithas (Linux)
+        run: |
+          source $HOME/.cargo/env
+          RUSTFLAGS="-C target-cpu=native" cargo b -r --features syzygy,bindgen
+
+      - name: Upload Linux binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: viridithas-linux
+          path: target/release/viridithas
+
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Rust and Cargo
+        shell: pwsh
+        run: |
+          irm https://win.rustup.rs -UseBasicParsing | iex
+          rustc --version
+          cargo --version
+
+      - name: Install clang
+        shell: pwsh
+        run: |
+          choco install llvm --yes
+          clang --version
+
+      - name: Build Viridithas (Windows)
+        shell: pwsh
+        run: |
+          $env:RUSTFLAGS="-C target-cpu=native"
+          cargo b -r --features syzygy,bindgen
+
+      - name: Upload Windows executable
+        uses: actions/upload-artifact@v4
+        with:
+          name: viridithas-windows
+          path: target/release/viridithas.exe
